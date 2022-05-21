@@ -2,11 +2,11 @@ pipeline {
     agent any
 	
 	environment {
-		PROJECT_ID = 'possible-sun-342923'
-    CLUSTER_NAME = 'cluster-1'
+		PROJECT_ID = 'intricate-facet-349908'
+    CLUSTER_NAME = 'demo-cluster'
     LOCATION = 'us-central1-c'
-    CREDENTIALS_ID = 'kubernetes'
-    EMAIL_TO = 'bermcis6@gmail.com'
+    CREDENTIALS_ID = 'GKEproject'
+    EMAIL_TO = 'swapna.r.nimmala@gmail.com'
 	}
 	
     stages {	    
@@ -27,9 +27,9 @@ pipeline {
 	    stage('Build Docker Image') {
 		    steps {
 			     script {
-				     myimage = docker.build("raghukom/devops:${env.BUILD_ID}")
+				     myimage = docker.build("swapnarnimmala/apdemo:${env.BUILD_ID}")
 				     
-				     //sh 'docker build -t raghukom/devops:latest .'
+				     //sh 'docker build -t swapnarnimmala/apdemo:latest .'
 			     }
 		    }
 	    }
@@ -40,7 +40,7 @@ pipeline {
 				 //sh 'docker push raghukom/devops:latest'
 			     script {
 				     echo "Push Docker Image"
-				     withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+				     withCredentials([usernamePassword(credentialsId: 'Docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                                        sh 'docker login -u $USERNAME -p $PASSWORD'
 
                             }
